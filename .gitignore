@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Data (regenerate with: python run_all.py --stage download)
+data/raw/
+data/cache/
+
+# Model artifacts (regenerate with: python run_all.py --stage train)
+outputs/models/
+
+# Intermediate predictions (regenerate with: python run_all.py --stage train evaluate)
+*.parquet
+
+# Editors / OS
+.ipynb_checkpoints/
+.vscode/
+.DS_Store

@@ -1,0 +1,522 @@
+{
+  "training": {
+    "library": "lightgbm 4.7.0",
+    "objective": "quantile (pinball loss)",
+    "n_features": 47,
+    "feature_names": [
+      "Store",
+      "Promo",
+      "StateHoliday",
+      "SchoolHoliday",
+      "StoreType",
+      "Assortment",
+      "CompetitionDistance",
+      "Promo2",
+      "dow",
+      "month",
+      "year",
+      "weekofyear",
+      "dayofyear",
+      "quarter",
+      "is_weekend",
+      "is_month_start",
+      "lag_1",
+      "lag_2",
+      "lag_3",
+      "lag_6",
+      "lag_7",
+      "lag_8",
+      "lag_14",
+      "lag_21",
+      "lag_28",
+      "lag_35",
+      "lag_42",
+      "lag_56",
+      "lag_364",
+      "roll_mean_7",
+      "roll_mean_14",
+      "roll_mean_28",
+      "roll_std_7",
+      "roll_std_28",
+      "mean7_over_mean28",
+      "same_dow_mean_4",
+      "open_lag1",
+      "promo_streak",
+      "promo_lag1",
+      "promo_sum_7",
+      "promo2_active",
+      "promo2_weeks_active",
+      "competition_months_open",
+      "comp_dist",
+      "comp_dist_log",
+      "has_competition",
+      "market_sales_lag1"
+    ],
+    "rows": {
+      "train": 759901,
+      "valid": 25880,
+      "test": 58611
+    },
+    "models": {
+      "q_0.05": {
+        "alpha": 0.05,
+        "best_iteration": 919,
+        "fit_seconds": 172.2,
+        "valid_pinball": 72.158
+      },
+      "q_0.10": {
+        "alpha": 0.1,
+        "best_iteration": 1448,
+        "fit_seconds": 69.6,
+        "valid_pinball": 118.813
+      },
+      "q_0.25": {
+        "alpha": 0.25,
+        "best_iteration": 1492,
+        "fit_seconds": 69.0,
+        "valid_pinball": 216.749
+      },
+      "q_0.50": {
+        "alpha": 0.5,
+        "best_iteration": 1500,
+        "fit_seconds": 76.0,
+        "valid_pinball": 278.55
+      },
+      "q_0.75": {
+        "alpha": 0.75,
+        "best_iteration": 1497,
+        "fit_seconds": 67.0,
+        "valid_pinball": 250.004
+      },
+      "q_0.90": {
+        "alpha": 0.9,
+        "best_iteration": 140,
+        "fit_seconds": 12.3,
+        "valid_pinball": 165.012
+      },
+      "q_0.95": {
+        "alpha": 0.95,
+        "best_iteration": 153,
+        "fit_seconds": 13.1,
+        "valid_pinball": 98.196
+      }
+    },
+    "quantile_crossed_rows": 32648,
+    "crossing_note": "rows whose quantiles were non-monotonic and got sorted"
+  },
+  "evaluation": {
+    "point": {
+      "valid": {
+        "q50_median": {
+          "MAE": 553.4356173487381,
+          "RMSE": 795.0668107054719
+        },
+        "seasonal_naive_lag7": {
+          "MAE": 1937.398193359375,
+          "RMSE": 2975.188232421875
+        },
+        "n_rows": 25880
+      },
+      "test": {
+        "q50_median": {
+          "MAE": 543.8514149805874,
+          "RMSE": 794.2371043697201
+        },
+        "seasonal_naive_lag7": {
+          "MAE": 2391.60302734375,
+          "RMSE": 3208.40380859375
+        },
+        "n_rows": 58611,
+        "MASE_q50_vs_naive": 0.24577570636697513
+      }
+    },
+    "pinball": {
+      "valid": {
+        "0.05": 71.05515293534488,
+        "0.10": 118.44627102852365,
+        "0.25": 213.81407494802846,
+        "0.50": 276.71780867436905,
+        "0.75": 247.9266526149217,
+        "0.90": 158.52337495636723,
+        "0.95": 96.88651187407908
+      },
+      "test": {
+        "0.05": 75.89851953270214,
+        "0.10": 124.45973058019443,
+        "0.25": 219.1364404571015,
+        "0.50": 271.9257074902937,
+        "0.75": 226.3224773852358,
+        "0.90": 146.37080769606587,
+        "0.95": 95.34062429376795
+      }
+    },
+    "coverage": {
+      "valid": {
+        "50": {
+          "nominal": 0.5,
+          "scale_k": 1.4335854333431306,
+          "raw": {
+            "coverage": 0.3773956723338485,
+            "mean_width": 663.8927658276281,
+            "median_width": 572.4912711105742,
+            "miss_hi_rate": 0.3267001545595054,
+            "miss_lo_rate": 0.2959041731066461
+          },
+          "calibrated": {
+            "coverage": 0.5,
+            "mean_width": 951.7231780767884,
+            "median_width": 820.7151469802125,
+            "miss_hi_rate": 0.2669242658423493,
+            "miss_lo_rate": 0.2330757341576507
+          }
+        },
+        "80": {
+          "nominal": 0.8,
+          "scale_k": 1.284757861434131,
+          "raw": {
+            "coverage": 0.7079211746522411,
+            "mean_width": 1535.0713802891096,
+            "median_width": 1353.8382284915406,
+            "miss_hi_rate": 0.15606646058732612,
+            "miss_lo_rate": 0.13601236476043277
+          },
+          "calibrated": {
+            "coverage": 0.7999613601236476,
+            "mean_width": 1972.1655543748059,
+            "median_width": 1739.354307164564,
+            "miss_hi_rate": 0.11151468315301391,
+            "miss_lo_rate": 0.08852395672333849
+          }
+        },
+        "90": {
+          "nominal": 0.9,
+          "scale_k": 1.2093019363594126,
+          "raw": {
+            "coverage": 0.8450540958268934,
+            "mean_width": 2181.1360938003613,
+            "median_width": 1881.3862488381433,
+            "miss_hi_rate": 0.08713292117465224,
+            "miss_lo_rate": 0.06781298299845441
+          },
+          "calibrated": {
+            "coverage": 0.8999613601236476,
+            "mean_width": 2637.549005293866,
+            "median_width": 2275.164033759939,
+            "miss_hi_rate": 0.05784389489953632,
+            "miss_lo_rate": 0.04219474497681607
+          }
+        }
+      },
+      "test": {
+        "50": {
+          "nominal": 0.5,
+          "scale_k": 1.4335854333431306,
+          "raw": {
+            "coverage": 0.40780740816570266,
+            "mean_width": 710.7381801680436,
+            "median_width": 633.029784071101,
+            "miss_hi_rate": 0.2437767654535838,
+            "miss_lo_rate": 0.3484158263807135
+          },
+          "calibrated": {
+            "coverage": 0.5402398867106857,
+            "mean_width": 1018.8721864771182,
+            "median_width": 907.5022773166784,
+            "miss_hi_rate": 0.186176656259064,
+            "miss_lo_rate": 0.2735834570302503
+          }
+        },
+        "80": {
+          "nominal": 0.8,
+          "scale_k": 1.284757861434131,
+          "raw": {
+            "coverage": 0.7225094265581546,
+            "mean_width": 1563.6434118045947,
+            "median_width": 1395.4997413990186,
+            "miss_hi_rate": 0.10214806094419136,
+            "miss_lo_rate": 0.17534251249765404
+          },
+          "calibrated": {
+            "coverage": 0.8163825902987494,
+            "mean_width": 2008.8519315316596,
+            "median_width": 1792.8792633916855,
+            "miss_hi_rate": 0.06853662281824231,
+            "miss_lo_rate": 0.11508078688300831
+          }
+        },
+        "90": {
+          "nominal": 0.9,
+          "scale_k": 1.2093019363594126,
+          "raw": {
+            "coverage": 0.8431523092934773,
+            "mean_width": 2142.865850035319,
+            "median_width": 1880.165917334405,
+            "miss_hi_rate": 0.058316698230707543,
+            "miss_lo_rate": 0.09853099247581512
+          },
+          "calibrated": {
+            "coverage": 0.8992509938407466,
+            "mean_width": 2591.3136990712123,
+            "median_width": 2273.688284509467,
+            "miss_hi_rate": 0.03934415041545102,
+            "miss_lo_rate": 0.06140485574380236
+          }
+        }
+      }
+    },
+    "calibration_scale_factors": {
+      "50": 1.4335854333431306,
+      "80": 1.284757861434131,
+      "90": 1.2093019363594126
+    },
+    "calibration_method": "multiplicative widening around the median; factor fitted on the validation month so the interval attains nominal coverage there"
+  },
+  "decision": {
+    "setup": "daily newsvendor per store: order Q, leftover wasted at Co=1, lost demand charged at Cu = ratio * Co",
+    "cost_ratios": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      9,
+      15,
+      25
+    ],
+    "headline_ratio": 9,
+    "at_ratio_9": {
+      "Seasonal naive (lag 7)": {
+        "total_cost": 779510592.0,
+        "fill_rate": 0.8095789551734924,
+        "stockout_day_rate": 0.5352749483885277,
+        "overage_units": 60257188.0,
+        "shortage_units": 79917040.0
+      },
+      "Point forecast (q50)": {
+        "total_cost": 147194665.59900954,
+        "fill_rate": 0.9656531922937703,
+        "stockout_day_rate": 0.44203306546552695,
+        "overage_units": 17460801.493979417,
+        "shortage_units": 14414873.789447792
+      },
+      "Upper 80% PI (q90)": {
+        "total_cost": 85789394.09874117,
+        "fill_rate": 0.9925373349211458,
+        "stockout_day_rate": 0.10214806094419136,
+        "overage_units": 57601610.66680884,
+        "shortage_units": 3131975.9368813704
+      },
+      "Upper 80% PI calibrated": {
+        "total_cost": 90545648.590678,
+        "fill_rate": 0.9948931558740871,
+        "stockout_day_rate": 0.06853662281824231,
+        "overage_units": 71256210.47161284,
+        "shortage_units": 2143270.9021183527
+      },
+      "Upper 90% PI (q95)": {
+        "total_cost": 92762564.43598391,
+        "fill_rate": 0.9954733722597567,
+        "stockout_day_rate": 0.058316698230707543,
+        "overage_units": 75664704.47969288,
+        "shortage_units": 1899762.2173656703
+      }
+    },
+    "savings_vs_point_pct_at_ratio_9": {
+      "Seasonal naive (lag 7)": -429.5780175373728,
+      "Point forecast (q50)": 0.0,
+      "Upper 80% PI (q90)": 41.717049493865325,
+      "Upper 80% PI calibrated": 38.485781246078474,
+      "Upper 90% PI (q95)": 36.97966970576949
+    },
+    "fill_rate_note": "fill rate of the point (median) policy is ~50% by construction"
+  },
+  "overconfidence": {
+    "spike_definition": "actual >= store's train-period p95",
+    "coverage": {
+      "overall_raw": 0.7225094265581546,
+      "overall_cal": 0.8163825902987494,
+      "promo_raw": 0.7161843752301009,
+      "no_promo_raw": 0.7279722725682851,
+      "spike_raw": 0.672514619883041,
+      "normal_raw": 0.7261055634807418,
+      "school_holiday_raw": 0.7426496263705566
+    },
+    "interval_width": {
+      "promo_days": 1845.0312299323875,
+      "no_promo_days": 1320.6132386357465,
+      "promo_over_nopromo_ratio": 1.3971018735495857
+    },
+    "high_misses": {
+      "n_above_calibrated_hi": 4017,
+      "share_of_high_misses_on_promo": 0.47000250220298767,
+      "overall_promo_share": 0.4634283781051636
+    },
+    "per_store": {
+      "p10_coverage_raw": 0.6346153846153846,
+      "median_coverage_raw": 0.7307692307692307,
+      "p90_coverage_raw": 0.8113207547169812,
+      "stores_below_70pct": 428,
+      "n_stores": 1115,
+      "worst_stores": [
+        {
+          "Store": 722,
+          "coverage_raw": 0.4528301886792453,
+          "coverage_cal": 0.5283018867924528,
+          "promo_share": 0.4716981053352356,
+          "mae": 1060.8406777292435
+        },
+        {
+          "Store": 1011,
+          "coverage_raw": 0.46153846153846156,
+          "coverage_cal": 0.5769230769230769,
+          "promo_share": 0.4615384638309479,
+          "mae": 754.5179156313033
+        },
+        {
+          "Store": 58,
+          "coverage_raw": 0.4807692307692308,
+          "coverage_cal": 0.5576923076923077,
+          "promo_share": 0.4615384638309479,
+          "mae": 840.0770961242949
+        },
+        {
+          "Store": 710,
+          "coverage_raw": 0.5,
+          "coverage_cal": 0.6346153846153846,
+          "promo_share": 0.4615384638309479,
+          "mae": 713.5025777191863
+        },
+        {
+          "Store": 909,
+          "coverage_raw": 0.5,
+          "coverage_cal": 0.6052631578947368,
+          "promo_share": 0.44736841320991516,
+          "mae": 3777.646210886555
+        },
+        {
+          "Store": 1070,
+          "coverage_raw": 0.5094339622641509,
+          "coverage_cal": 0.6981132075471698,
+          "promo_share": 0.4716981053352356,
+          "mae": 702.1171407994977
+        },
+        {
+          "Store": 279,
+          "coverage_raw": 0.5192307692307693,
+          "coverage_cal": 0.6730769230769231,
+          "promo_share": 0.4615384638309479,
+          "mae": 1301.9550312363901
+        },
+        {
+          "Store": 477,
+          "coverage_raw": 0.5192307692307693,
+          "coverage_cal": 0.7115384615384616,
+          "promo_share": 0.4615384638309479,
+          "mae": 578.9261443516745
+        },
+        {
+          "Store": 605,
+          "coverage_raw": 0.5192307692307693,
+          "coverage_cal": 0.6538461538461539,
+          "promo_share": 0.4615384638309479,
+          "mae": 680.4871041753764
+        },
+        {
+          "Store": 636,
+          "coverage_raw": 0.5192307692307693,
+          "coverage_cal": 0.6538461538461539,
+          "promo_share": 0.4615384638309479,
+          "mae": 1044.6727575064842
+        }
+      ]
+    },
+    "worst_weeks": [
+      {
+        "week_label": "2015-06-29",
+        "n": 6720,
+        "coverage_raw": 0.6470238095238096,
+        "coverage_cal": 0.7398809523809524,
+        "promo_share": 0.8293154835700989,
+        "mae": 796.3977868733296
+      },
+      {
+        "week_label": "2015-06-08",
+        "n": 6720,
+        "coverage_raw": 0.6867559523809523,
+        "coverage_cal": 0.7918154761904762,
+        "promo_share": 0.0,
+        "mae": 448.68154471805093
+      },
+      {
+        "week_label": "2015-06-01",
+        "n": 6039,
+        "coverage_raw": 0.7160125848650439,
+        "coverage_cal": 0.8213280344427886,
+        "promo_share": 0.8099023103713989,
+        "mae": 630.2529812293108
+      },
+      {
+        "week_label": "2015-06-22",
+        "n": 6718,
+        "coverage_raw": 0.717326585293242,
+        "coverage_cal": 0.8073831497469485,
+        "promo_share": 0.0,
+        "mae": 412.887312356812
+      },
+      {
+        "week_label": "2015-07-06",
+        "n": 6715,
+        "coverage_raw": 0.7230081906180194,
+        "coverage_cal": 0.812807148175726,
+        "promo_share": 0.0,
+        "mae": 454.52538956150454
+      }
+    ]
+  },
+  "bonus": {
+    "setup": "both methods calibrated on the validation month; residual intervals = point forecast + quantiles of its residuals",
+    "point_forecast_cost_Cu9_test": 147194665.59900954,
+    "methods": [
+      {
+        "method": "Quantile GBM (q10/q90, raw)",
+        "coverage_valid": 0.7079211746522411,
+        "coverage_test": 0.7225094265581546,
+        "mean_width_test": 1563.6434118045947,
+        "pinball_10_90_test": 135.41526913813016,
+        "cost_Cu9_test": 85789394.09874117
+      },
+      {
+        "method": "Quantile GBM + scale calibration",
+        "coverage_valid": 0.7999613601236476,
+        "coverage_test": 0.8163825902987494,
+        "mean_width_test": 2008.8519315316596,
+        "pinball_10_90_test": 137.60796025373605,
+        "cost_Cu9_test": 90545648.590678
+      },
+      {
+        "method": "Residual - global (point + residual q10/q90)",
+        "coverage_valid": 0.8,
+        "coverage_test": 0.7917626384125847,
+        "mean_width_test": 1713.5846660183372,
+        "pinball_10_90_test": 140.75421962271497,
+        "cost_Cu9_test": 88133739.84433216
+      },
+      {
+        "method": "Residual - per store (absolute)",
+        "coverage_valid": 0.7416537867078825,
+        "coverage_test": 0.737233625087441,
+        "mean_width_test": 1599.086725147386,
+        "pinball_10_90_test": 141.04182816241973,
+        "cost_Cu9_test": 85759742.04690783
+      },
+      {
+        "method": "Residual - per store (relative)",
+        "coverage_valid": 0.7415765069551777,
+        "coverage_test": 0.7330876456637833,
+        "mean_width_test": 1646.6594403148695,
+        "pinball_10_90_test": 138.03011104435103,
+        "cost_Cu9_test": 85790166.89900225
+      }
+    ]
+  }
+}

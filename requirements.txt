@@ -1,0 +1,8 @@
+# Tested with Python 3.12 on Windows/Linux/macOS.
+# Install:  pip install -r requirements.txt
+pandas>=2.0
+numpy>=1.26
+lightgbm>=4.0
+matplotlib>=3.7
+pyarrow>=14.0
+PyYAML>=6.0
